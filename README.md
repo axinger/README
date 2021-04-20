@@ -335,3 +335,9 @@ str2="1234"
 echo 子串长度: ${#str2} #输出 4
 ```
 
+# 8 vscode 快捷键
+
+```bash
+Option + Shift + F 格式化
+```
+
