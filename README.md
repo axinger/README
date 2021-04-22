@@ -303,7 +303,12 @@ git config --global http.https://github.com.proxy socks5://127.0.0.1:8001
 git config --global https.https://github.com.proxy socks5://127.0.0.1:8001
 ```
 
+ #### 3 取消代理
 
+```bash
+git config --global --unset http.https://github.com.proxy
+git config --global --unset https.https://github.com.proxy
+```
 
 # 7 shell语法
 
