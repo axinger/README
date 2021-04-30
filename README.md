@@ -40,6 +40,18 @@ pod trunk register aa@qq.com bb
 
 ## 2.1 新建
 
+注册
+
+```
+pod trunk register liu_weixing@qq.com 'axinger' --description='阿星iOS'
+```
+
+```
+pod trunk me
+```
+
+
+
 ```
 pod lib create AXiOSKit
 ```
@@ -59,13 +71,15 @@ pod lib lint --verbose --use-libraries --allow-warnings --sources='https://gitee
 ### 2.2.2 远程验证,是从本地和远程验证你的pod能否通过验证。
 
 ```ruby
-pod spec lint AXiOSKit.podspec --allow-warnings
+pod spec lint --allow-warnings
+pod spec lint  --use-libraries --allow-warnings --verbose
 ```
 
 ## 2.3推送
 
 ```ruby
-pod trunk push AXiOSKit.podspec --allow-warnings
+pod trunk push  --allow-warnings
+pod trunk push  --allow-warnings --verbose
 ```
 
 ```
