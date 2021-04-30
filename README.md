@@ -72,7 +72,7 @@ pod lib lint --verbose --use-libraries --allow-warnings --sources='https://gitee
 
 ```ruby
 pod spec lint --allow-warnings
-pod spec lint  --use-libraries --allow-warnings --verbose
+pod spec lint  --use-libraries --allow-warnings --verbose --skip-import-validation
 ```
 
 ## 2.3推送
