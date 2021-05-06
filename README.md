@@ -354,6 +354,103 @@ str2="1234"
 echo 子串长度: ${#str2} #输出 4
 ```
 
+## 7.4 脚本
+
+```shell
+#!/bin/bash
+
+#脚本所在目录
+currentPath=$(dirname $0)
+cd $currentPath
+echo "当前路径: $(pwd)"
+
+echo
+echo "🐶 选择环境变量(输入序号,默认值0 release)"
+# declare -A buildMap
+is_itunes_on_1="release is_itunes_on:1"
+buildMap=([0]="release" [1]=$is_itunes_on_1 [2]="test")
+
+for key in ${!buildMap[@]}; do
+    buildFormat="$buildFormat $key ${buildMap[$key]}, "
+done
+# 前景色：30黑 31红 32绿 33黄 34蓝 35紫 36青 37白
+# 背景色：40黑 41红 42绿 43黄 44青 45蓝 46青 47白
+
+#含有颜色
+axLog() {
+    # 所有参数 $*
+    echo -e "\033[47;34m $* \033[0m"
+    echo
+}
+
+# echo -e "\033[47;34m $buildFormat \033[0m"
+# echo
+axLog $buildFormat
+
+read -p "请输入模式编号: " buildKey
+# :- 默认值
+buildKey=${buildKey:-0}
+# 是否包含,判断是否为指定范围
+[ "${buildMap[buildKey]}" ] || buildKey=0
+# 取值
+buildValue=${buildMap[buildKey]}
+# echo 编译模式key: $buildKey
+echo 编译模式value: $buildValue
+
+echo
+echo "🐶 输入版本号(默认值工程版本号)"
+read -p "输入版本号: " version_number
+# version_number=${version_number:-''}
+echo 版本号是: $version_number
+
+echo
+echo "🐶 选择环境变量(输入序号,默认值0)"
+envNumMap=(["0"]="生产" ["2"]="信通测试" ["8"]="润信通10030" ["10"]="润和测试")
+for key in ${!envNumMap[@]}; do
+    envNumFormat="$envNumFormat $key ${envNumMap[$key]}, "
+done
+axLog $envNumFormat
+
+read -p "请输入环境变量编号: " envNum
+# :- 默认值
+envNum=${envNum:-'0'}
+# 是否包含,判断是否为指定范围
+[ ${envNumMap[envNum]} ] || envNum="0"
+echo 环境变量: $envNum
+# echo "envNum = $envNum"
+
+file="Gemfile.lock"
+rm -rf $file
+
+# 拼接语句
+#😄 定义语句
+fastlane="fastlane ios "
+if [ "$buildValue" != "" ]; then
+    fastlane="$fastlane $buildValue"
+fi
+
+if [ "$envNum" != "" ]; then
+    fastlane="$fastlane envNum:$envNum"
+fi
+
+if [ "$version_number" != "" ]; then
+    fastlane="$fastlane version_number:$version_number"
+fi
+
+# 打印fastlane语句
+echo
+echo "🔽 🔽 🔽 🔽 🔽 🔽 🔽 🔽 🔽 🔽"
+echo
+echo 🚀 ${fastlane}
+echo
+echo "🔼 🔼 🔼 🔼 🔼 🔼 🔼 🔼 🔼 🔼"
+echo
+# 执行fastlane语句
+# $fastlane
+```
+
+
+
 # 8 vscode 快捷键
 
 ```bash
