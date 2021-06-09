@@ -204,7 +204,7 @@ export PATH="/Users/ccy/.rvm/bin:$PATH"
 
 
 
-# 4.Xcode快捷键
+# 4.Xcode
 
 ## 4.1快捷键
 
