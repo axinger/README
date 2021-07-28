@@ -481,3 +481,32 @@ type用于说明 commit 的类别，只允许使用下面7个标识。
 如果type为feat和fix，则该 commit 将肯定出现在 Change log 之中。其他情况（docs、chore、style、refactor、test）由你决定，要不要放入 Change log，建议是不要。
 ```
 
+# 11 SQLite
+
+## 1 建表,有主键
+
+```sqlite
+CREATE TABLE test_create_tab2 (
+id INTEGER PRIMARY KEY
+); 
+```
+
+## 2 建表,主键,含有默认值
+
+```sqlite
+CREATE TABLE test_create_tab1 (
+id INT,
+val VARCHAR(10),
+PRIMARY KEY (id)
+);
+```
+
+## 3 建表,自增主键
+
+```sqlite
+Create table tabName(
+id INTEGER PRIMARY KEY AUTOINCREMENT, 
+name varchar, 
+type Integer);
+```
+
