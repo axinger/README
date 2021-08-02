@@ -510,3 +510,33 @@ name varchar,
 type Integer);
 ```
 
+## 4 查询最后一条数据
+
+本文共分为三种方式
+
+1.max(id) 函数
+
+```
+select * from student where id = (select max(id) from student);
+```
+
+2.order by id desc limit 1
+
+```
+select * from student order by id desc limit 1;
+```
+
+3.last_insert_id() 函数
+
+```
+select * from student where id = (select last_insert_id());
+```
+
+## 5 不存在插入，存在更新语句
+
+```
+replace INTO
+```
+
+
+
