@@ -164,6 +164,7 @@ brew cache clean //清理缓存
 brew search redis
 查看安装位置
 brew list redis
+// 查看正在运行的服务
 brew services list	
 brew search redis
 open /usr/local/bin/jmeter
