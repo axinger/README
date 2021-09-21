@@ -541,3 +541,11 @@ replace INTO
 
 
 
+# 12 Mac命令
+
+## 1.修改md5值
+
+```
+echo a >>
+```
+
