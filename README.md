@@ -224,6 +224,7 @@ export PATH="/Users/ccy/.rvm/bin:$PATH"
 	12.构建应用程序: Command + B
 	13.文档和参考: Command + Shift + 0 (Zero)
 	14.清空控制台  Command  + k
+	15.control+command+上, h,m文件切换
 
 ```
 
