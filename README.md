@@ -550,3 +550,29 @@ replace INTO
 echo a >>
 ```
 
+# 本地path配置
+
+```
+
+#JDK 
+#export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home
+export PATH=$PATH:$JAVA_HOME/bin
+# JDK END
+
+# go
+# go 创建项目保存路径
+export GOPATH=$HOME/Develop/go
+# go sdk的目录
+export GOROOT=/usr/local/go
+# go END
+
+#flutter 国内镜像
+export PUB_HOSTED_URL=https://pub.flutter-io.cn
+export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
+export FLUTTER_HOME=$HOME/Develop/SDK/flutter
+export PATH=$PATH:$FLUTTER_HOME/bin
+# flutter END
+
+```
+
