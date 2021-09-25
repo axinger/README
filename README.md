@@ -40,17 +40,25 @@ pod trunk register aa@qq.com bb
 
 ## 2.1 新建
 
-注册
+#### 1. 注册(登录)
 
 ```
 pod trunk register liu_weixing@qq.com 'axinger' --description='阿星iOS'
 ```
 
+#### 2. 查看自己的库
+
 ```
 pod trunk me
 ```
 
+#### 3. 删除仓库的库
 
+```
+pod trunk remove-owner AXFoundation liu_weixing@qq.com
+```
+
+#### 4. 创建库
 
 ```
 pod lib create AXiOSKit
@@ -60,26 +68,49 @@ pod lib create AXiOSKit
 pod lib create xx --template-url=https://gitee.com/axinger/pod-template.git
 ```
 
+#### 5.查看库信息
+
+```
+pod trunk info AXiOSKit
+```
+
+
+
 ## 2.2 验证
 
-### 2.2.1 本地验证,只从本地验证你的pod能否通过验证。
+```
+说明：
+(1)--verbose:表示显示全部的日志信息，建议加上这个，方便判断错误信息。
+(2)--sources:如果我们在podspec里面依赖到一些私有的库之后，直接进行校验是会报错的提示找不到，这里加上我们的Spec仓库的地址告诉CocoaPods找不到的时候去哪里找。
+(3)--allow-warnings:表示允许警告.
+(4)--use-libraries:表示使用静态库或者是framework，这里主要是解决当我们依赖一些framework库后校验提示找不到库的时候用到。
+```
+
+
+
+### 1 本地验证,只从本地验证你的pod能否通过验证。
 
 ```shell
-pod lib lint --verbose --use-libraries --allow-warnings --sources='https://gitee.com/axinger/AXCollectionObserve.git,https://gitee.com/mirrors/CocoaPods-Specs.git'
+pod lib lint --verbose --use-libraries --allow-warnings --skip-import-validation
+--sources='https://gitee.com/axinger/AXCollectionObserve.git,https://gitee.com/mirrors/CocoaPods-Specs.git'
 ```
 
-### 2.2.2 远程验证,是从本地和远程验证你的pod能否通过验证。
+
+
+### 2 远程验证,是从本地和远程验证你的pod能否通过验证。
 
 ```ruby
-pod spec lint --allow-warnings
-pod spec lint  --use-libraries --allow-warnings --verbose --skip-import-validation
+pod spec lint --use-libraries --verbose --skip-import-validation --allow-warnings
+pod spec lint --use-libraries --allow-warnings --verbose --skip-import-validation
 ```
+
+
 
 ## 2.3推送
 
 ```ruby
 pod trunk push  --allow-warnings
-pod trunk push  --allow-warnings --verbose
+pod trunk push  --allow-warnings --verbose --use-libraries
 ```
 
 ```
