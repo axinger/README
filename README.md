@@ -71,7 +71,7 @@ pod lib lint --verbose --use-libraries --allow-warnings --sources='https://gitee
 ### 2.2.2 远程验证,是从本地和远程验证你的pod能否通过验证。
 
 ```ruby
-pod spec lint --allow-warnings
+pod spec lint --allow-warnings --verbose
 pod spec lint  --use-libraries --allow-warnings --verbose --skip-import-validation
 ```
 
