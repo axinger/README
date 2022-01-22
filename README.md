@@ -74,8 +74,6 @@ pod lib create xx --template-url=https://gitee.com/axinger/pod-template.git
 pod trunk info AXiOSKit
 ```
 
-
-
 ## 2.2 验证
 
 ```
@@ -86,8 +84,6 @@ pod trunk info AXiOSKit
 (4)--use-libraries:表示使用静态库或者是framework，这里主要是解决当我们依赖一些framework库后校验提示找不到库的时候用到。
 ```
 
-
-
 ### 1 本地验证,只从本地验证你的pod能否通过验证。
 
 ```shell
@@ -95,21 +91,15 @@ pod lib lint --verbose --use-libraries --allow-warnings --skip-import-validation
 --sources='https://gitee.com/axinger/AXCollectionObserve.git,https://gitee.com/mirrors/CocoaPods-Specs.git'
 ```
 
-
-
 ### 2 远程验证,是从本地和远程验证你的pod能否通过验证。
 
 ```ruby
-
 pod spec lint --use-libraries --verbose --skip-import-validation --allow-warnings
 pod spec lint --use-libraries --allow-warnings --verbose --skip-import-validation
 
 pod spec lint --allow-warnings --verbose
 pod spec lint  --use-libraries --allow-warnings --verbose --skip-import-validation
-
 ```
-
-
 
 ## 2.3推送
 
@@ -120,7 +110,6 @@ pod trunk push  --allow-warnings --verbose --use-libraries
 
 ```
 pod repo push 本地repo名 podspec名 --sources='私有仓库repo地址,https://github.com/CocoaPods/Specs'
-
 ```
 
 cocopod 本地查找路径
@@ -159,8 +148,6 @@ sudo xattr -rd com.apple.quarantine /Applications/CleanMyMacX.app
 ****
 ```
 
-
-
 # 3. homebrew
 
 ```
@@ -168,8 +155,6 @@ rvm是用来管理ruby的，ruby的其中一个“程序”叫rubygems，简称 
 
 bundle是rails框架里面安装Gemfile指定的各种库的工具
 ```
-
-
 
 ## 3.1 brew cask 拓展 安装mac app
 
@@ -182,7 +167,8 @@ brew search xx --cask
 2. 安装app
 
 ```sh
-brew install xx --cask
+brew install xx --cask 失效
+brew install --cask xxxx 
 ```
 
 ## 3.2 命令
@@ -201,7 +187,7 @@ brew search redis
 查看安装位置
 brew list redis
 // 查看正在运行的服务
-brew services list	
+brew services list    
 brew search redis
 open /usr/local/bin/jmeter
 nacos 启动
@@ -219,7 +205,6 @@ sh zkServer.sh stop
 sudo nginx
 sudo nginx -s reload
 sudo nginx -s quit
-
 ```
 
 ## 3.3 RMV 离线安装
@@ -227,7 +212,7 @@ sudo nginx -s quit
 ```
 上github下载rvm，https://github.com/rvm/rvm.git。
 双击打开/bin/rvm-installer
-	.../Users/ccy/.rvm/ is complete.
+    .../Users/ccy/.rvm/ is complete.
 提示这个说明安装完成。
 然后配置到.bash_profile
 export PATH="/Users/ccy/.rvm/bin:$PATH"
@@ -239,43 +224,39 @@ export PATH="/Users/ccy/.rvm/bin:$PATH"
 来源：简书
 ```
 
-
-
 # 4.Xcode
 
 ## 4.1快捷键
 
 ```
-	1.工程导航器:Command+1
-	2.显示/隐藏导航器面板:Command+0
-	3.显示/隐藏实用工具面板:Command+Option+0
-	4.在辅助编辑器中打开文件:在项目导航器中选中文件执行Option+左键点击操作。
-	5.搜索导航器(Find Navigator，也就是搜索):Command+Shift+F
-	6.文件跳转栏:Control+6（键入方法/变量名+Enter跳转）
-	7.快速打开: Command + Shift + O
-	8.跳转栏和快速打开搜索输入快捷键
-	9. 程序中(Objective-C或C++编写).h and .m文件间的快速切换: Control + Command + Up Arrow
-	10.运行app: Command + R
-	11.清除工程: Command + Shift + K
-	12.构建应用程序: Command + B
-	13.文档和参考: Command + Shift + 0 (Zero)
-	14.清空控制台  Command  + k
-	15.control+command+上, h,m文件切换
-
+    1.工程导航器:Command+1
+    2.显示/隐藏导航器面板:Command+0
+    3.显示/隐藏实用工具面板:Command+Option+0
+    4.在辅助编辑器中打开文件:在项目导航器中选中文件执行Option+左键点击操作。
+    5.搜索导航器(Find Navigator，也就是搜索):Command+Shift+F
+    6.文件跳转栏:Control+6（键入方法/变量名+Enter跳转）
+    7.快速打开: Command + Shift + O
+    8.跳转栏和快速打开搜索输入快捷键
+    9. 程序中(Objective-C或C++编写).h and .m文件间的快速切换: Control + Command + Up Arrow
+    10.运行app: Command + R
+    11.清除工程: Command + Shift + K
+    12.构建应用程序: Command + B
+    13.文档和参考: Command + Shift + 0 (Zero)
+    14.清空控制台  Command  + k
+    15.control+command+上, h,m文件切换
 ```
 
 ## 4.2控制台
 
 ```
-	1. p命令：可以查看基本数据类型的值，如果查看对象的话，会返回对象的地址指针。p命令还可以接表达式。
-	2. po命令：打印对象，与p命令类似。
-	3. bt命令：打印线程的堆栈信息。bt all 是打印所有线程的堆栈信息。
-	4. expr命令： expression 的简写，能够在调试时，动态的执行赋值表达式，同时打印出结果。我们可以在调试时，动态的修改变量的值，这在调试想要让应用执行异常路径（如执行某个else 情况）很有用。
-	5. call命令：动态调用函数，在控制台执行该命令的，可以在不修改代码，不重新编译的情况下，修改界面上的视图。
-	6. image命令：image list可以查看某一个地址对应的代码位置。除了 image list 还有 image add、image lookup等命令，当遇到crash 时，查看线程栈，只能看到栈帧的地址，使用 image lookup –address 地址 可以方便的定位到这个地址对应的代码行。
-	7. x命令:查看地址，例如：x student
-	8. x/4gx命令：打印4个16进制地址。x/4gx student
-
+    1. p命令：可以查看基本数据类型的值，如果查看对象的话，会返回对象的地址指针。p命令还可以接表达式。
+    2. po命令：打印对象，与p命令类似。
+    3. bt命令：打印线程的堆栈信息。bt all 是打印所有线程的堆栈信息。
+    4. expr命令： expression 的简写，能够在调试时，动态的执行赋值表达式，同时打印出结果。我们可以在调试时，动态的修改变量的值，这在调试想要让应用执行异常路径（如执行某个else 情况）很有用。
+    5. call命令：动态调用函数，在控制台执行该命令的，可以在不修改代码，不重新编译的情况下，修改界面上的视图。
+    6. image命令：image list可以查看某一个地址对应的代码位置。除了 image list 还有 image add、image lookup等命令，当遇到crash 时，查看线程栈，只能看到栈帧的地址，使用 image lookup –address 地址 可以方便的定位到这个地址对应的代码行。
+    7. x命令:查看地址，例如：x student
+    8. x/4gx命令：打印4个16进制地址。x/4gx student
 ```
 
 ****
@@ -293,7 +274,6 @@ option command + ↔️ 最近位置
 查看所有方法 command + 7
 VS Code 快捷键
 格式化 shift +op+f 或者鼠标右键
-
 ```
 
 # 6 Mac 操作
@@ -312,11 +292,9 @@ sudo scutil --set HostName xx
 强制退出终端：command + q
 ```
 
-
-
 ## 6.3 设置git代理
 
-### 1.通用git 
+### 1.通用git
 
 设置代理
 
@@ -337,8 +315,6 @@ git config --global --unset https.proxy
 git config --global -l
 ```
 
-
-
 ### 2 设置github代理
 
 #### 1 ***http*** 、***https*** 方式
@@ -355,12 +331,14 @@ git config --global http.https://github.com.proxy socks5://127.0.0.1:8001
 git config --global https.https://github.com.proxy socks5://127.0.0.1:8001
 ```
 
- #### 3 取消代理
+#### 3 取消代理
 
 ```bash
 git config --global --unset http.https://github.com.proxy
 git config --global --unset https.https://github.com.proxy
 ```
+
+# 
 
 # 7 shell语法
 
@@ -487,15 +465,11 @@ echo
 # $fastlane
 ```
 
-
-
 # 8 vscode 快捷键
 
 ```bash
 Option + Shift + F 格式化
 ```
-
-
 
 # 9 GitHub频道
 
@@ -576,8 +550,6 @@ select * from student where id = (select last_insert_id());
 replace INTO
 ```
 
-
-
 # 12 Mac命令
 
 ## 1.修改md5值
@@ -589,7 +561,6 @@ echo a >>
 # 本地path配置
 
 ```
-
 #JDK 
 #export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home
@@ -609,6 +580,4 @@ export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
 export FLUTTER_HOME=$HOME/Develop/SDK/flutter
 export PATH=$PATH:$FLUTTER_HOME/bin
 # flutter END
-
 ```
-
