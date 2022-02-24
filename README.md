@@ -338,7 +338,7 @@ git config --global --unset http.https://github.com.proxy
 git config --global --unset https.https://github.com.proxy
 ```
 
-# 
+
 
 # 7 shell语法
 
@@ -557,6 +557,20 @@ replace INTO
 ```
 echo a >>
 ```
+
+## 2.查看端口占用
+
+```
+lsof -i:3000
+```
+
+## 3.关闭端口
+
+```
+kill -9 PID 
+```
+
+
 
 # 本地path配置
 
