@@ -338,8 +338,6 @@ git config --global --unset http.https://github.com.proxy
 git config --global --unset https.https://github.com.proxy
 ```
 
-
-
 # 7 shell语法
 
 ## 7.1 子串尽量用双引号
@@ -570,9 +568,7 @@ lsof -i:3000
 kill -9 PID 
 ```
 
-
-
-# 本地path配置
+# 13 本地path配置
 
 ```
 #JDK 
@@ -594,4 +590,17 @@ export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
 export FLUTTER_HOME=$HOME/Develop/SDK/flutter
 export PATH=$PATH:$FLUTTER_HOME/bin
 # flutter END
+```
+
+# 14 vim 命令
+
+```textile
+:w            - 保存文件，不退出 vim
+:w file  -将修改另外保存到 file 中，不退出 vim
+:w!          -强制保存，不退出 vim
+:wq          -保存文件，退出 vim
+:wq!        -强制保存文件，退出 vim
+:q            -不保存文件，退出 vim
+:q!          -不保存文件，强制退出 vim
+:e!          -放弃所有修改，从上次保存文件开始再编辑
 ```
