@@ -156,6 +156,20 @@ rvm是用来管理ruby的，ruby的其中一个“程序”叫rubygems，简称 
 bundle是rails框架里面安装Gemfile指定的各种库的工具
 ```
 
+```
+Homebrew国内如何自动安装（国内地址）
+
+苹果电脑 常规安装脚本（推荐 完全体 几分钟安装完成）：
+
+/bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
+
+苹果电脑 极速安装脚本（精简版 几秒钟安装完成）：
+
+/bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)" speed
+```
+
+
+
 ## 3.1 brew cask 拓展 安装mac app
 
 1. 搜索app,xx表示APP名称
@@ -570,7 +584,7 @@ kill -9 PID
 
 # 13 本地path配置
 
-```
+```text
 #JDK 
 #export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home
@@ -594,7 +608,7 @@ export PATH=$PATH:$FLUTTER_HOME/bin
 
 # 14 vim 命令
 
-```textile
+```text
 :w            - 保存文件，不退出 vim
 :w file  -将修改另外保存到 file 中，不退出 vim
 :w!          -强制保存，不退出 vim
@@ -604,3 +618,4 @@ export PATH=$PATH:$FLUTTER_HOME/bin
 :q!          -不保存文件，强制退出 vim
 :e!          -放弃所有修改，从上次保存文件开始再编辑
 ```
+
