@@ -24,8 +24,6 @@ export PATH=$PATH:$FLUTTER_HOME/bin
 # flutter END
 ```
 
-
-
 ## 2.命令
 
 ### 1.修改md5值
@@ -46,8 +44,6 @@ lsof -i:8080
 kill -9 PID 
 ```
 
-
-
 ### 4.查找文件命令
 
 ```
@@ -57,15 +53,11 @@ locate       配 合数据库查看文件位置
 find          实际搜寻硬盘查询文件名称 
 ```
 
-
-
 ### 5.mac 终端修改用户名
 
 ```shell
 sudo scutil --set HostName xx
 ```
-
-
 
 ## 3. 快捷键
 
@@ -76,8 +68,6 @@ sudo scutil --set HostName xx
 终止当前进程：control + z
 强制退出终端：command + q
 ```
-
-
 
 ## 4. 设置git代理
 
@@ -144,8 +134,6 @@ Homebrew国内如何自动安装（国内地址）
 
 /bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)" speed
 ```
-
-
 
 ## 1 brew cask 拓展 安装mac app
 
@@ -215,8 +203,6 @@ export PATH="/Users/ccy/.rvm/bin:$PATH"
 来源：简书
 ```
 
-
-
 # 3. cocopod使用
 
 ## 1 新建
@@ -254,8 +240,6 @@ pod repo update
 ```ruby
 pod trunk register aa@qq.com bb
 ```
-
-
 
 ## 5.制作cocopod库
 
@@ -295,7 +279,7 @@ pod lib create xx --template-url=https://gitee.com/axinger/pod-template.git
 pod trunk info AXiOSKit
 ```
 
-## 2 验证
+### 2.验证
 
 ```
 说明：
@@ -305,14 +289,14 @@ pod trunk info AXiOSKit
 (4)--use-libraries:表示使用静态库或者是framework，这里主要是解决当我们依赖一些framework库后校验提示找不到库的时候用到。
 ```
 
-### 1 本地验证,只从本地验证你的pod能否通过验证。
+#### 1 本地验证,只从本地验证你的pod能否通过验证。
 
 ```shell
 pod lib lint --verbose --use-libraries --allow-warnings --skip-import-validation
 --sources='https://gitee.com/axinger/AXCollectionObserve.git,https://gitee.com/mirrors/CocoaPods-Specs.git'
 ```
 
-### 2 远程验证,是从本地和远程验证你的pod能否通过验证。
+#### 2 远程验证,是从本地和远程验证你的pod能否通过验证。
 
 ```ruby
 pod spec lint --use-libraries --verbose --skip-import-validation --allow-warnings
@@ -643,4 +627,3 @@ replace INTO
 :q!          -不保存文件，强制退出 vim
 :e!          -放弃所有修改，从上次保存文件开始再编辑
 ```
-
