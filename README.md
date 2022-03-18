@@ -1,154 +1,131 @@
-# 1. cocopod使用
+# 1. Mac命令
 
-## 1.1 新建
+## 1.本地path配置
 
-```ruby
-init pod
+```text
+#JDK 
+#export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home
+export PATH=$PATH:$JAVA_HOME/bin
+# JDK END
+
+# go
+# go 创建项目保存路径
+export GOPATH=$HOME/Develop/go
+# go sdk的目录
+export GOROOT=/usr/local/go
+# go END
+
+#flutter 国内镜像
+export PUB_HOSTED_URL=https://pub.flutter-io.cn
+export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
+export FLUTTER_HOME=$HOME/Develop/SDK/flutter
+export PATH=$PATH:$FLUTTER_HOME/bin
+# flutter END
 ```
 
-## 1.2 打开编辑
 
-```ruby
-open -a xcode podfile
-```
 
-## 1.3 加载
+## 2.命令
 
-```ruby
-pod install --verbose --no-repo-update
-```
-
-执行pod install时，提示如下信息：
-
-The version of CocoaPods used to generate the lockfile (1.2.0.beta.1) is higher than the version of the current executable (1.1.1). Incompatibility issues may arise
-解决方法：
-
-执行：
-命令更新资源库即可。
-
-```ruby
-pod repo update
-```
-
-## 1.4 注册 不要bb 表示注册过,登录
-
-```ruby
-pod trunk register aa@qq.com bb
-```
-
-# 2.制作cocopod库
-
-## 2.1 新建
-
-#### 1. 注册(登录)
+### 1.修改md5值
 
 ```
-pod trunk register liu_weixing@qq.com 'axinger' --description='阿星iOS'
+echo a >>
 ```
 
-#### 2. 查看自己的库
+### 2.查看端口占用
 
 ```
-pod trunk me
+lsof -i:8080
 ```
 
-#### 3. 删除仓库的库
+### 3.关闭端口
 
 ```
-pod trunk remove-owner AXFoundation liu_weixing@qq.com
+kill -9 PID 
 ```
 
-#### 4. 创建库
+
+
+### 4.查找文件命令
 
 ```
-pod lib create AXiOSKit
+which       查看可执行文件的位置  命令只是根据PATH环境变量查找。
+whereis    查看文件的位置 
+locate       配 合数据库查看文件位置 
+find          实际搜寻硬盘查询文件名称 
 ```
 
-```sh
-pod lib create xx --template-url=https://gitee.com/axinger/pod-template.git
-```
 
-#### 5.查看库信息
 
-```
-pod trunk info AXiOSKit
-```
-
-## 2.2 验证
-
-```
-说明：
-(1)--verbose:表示显示全部的日志信息，建议加上这个，方便判断错误信息。
-(2)--sources:如果我们在podspec里面依赖到一些私有的库之后，直接进行校验是会报错的提示找不到，这里加上我们的Spec仓库的地址告诉CocoaPods找不到的时候去哪里找。
-(3)--allow-warnings:表示允许警告.
-(4)--use-libraries:表示使用静态库或者是framework，这里主要是解决当我们依赖一些framework库后校验提示找不到库的时候用到。
-```
-
-### 1 本地验证,只从本地验证你的pod能否通过验证。
+### 5.mac 终端修改用户名
 
 ```shell
-pod lib lint --verbose --use-libraries --allow-warnings --skip-import-validation
---sources='https://gitee.com/axinger/AXCollectionObserve.git,https://gitee.com/mirrors/CocoaPods-Specs.git'
+sudo scutil --set HostName xx
 ```
 
-### 2 远程验证,是从本地和远程验证你的pod能否通过验证。
 
-```ruby
-pod spec lint --use-libraries --verbose --skip-import-validation --allow-warnings
-pod spec lint --use-libraries --allow-warnings --verbose --skip-import-validation
 
-pod spec lint --allow-warnings --verbose
-pod spec lint  --use-libraries --allow-warnings --verbose --skip-import-validation
-```
+## 3. 快捷键
 
-## 2.3推送
-
-```ruby
-pod trunk push  --allow-warnings
-pod trunk push  --allow-warnings --verbose --use-libraries
-```
+### 1.终端快捷键
 
 ```
-pod repo push 本地repo名 podspec名 --sources='私有仓库repo地址,https://github.com/CocoaPods/Specs'
+清屏：command + k
+终止当前进程：control + z
+强制退出终端：command + q
 ```
 
-cocopod 本地查找路径
 
-```sh
-find ~/.cocoapods/repos/master -iname xxx
+
+## 4. 设置git代理
+
+### 1.通用git
+
+设置代理
+
+```bash
+git config --global http.proxy http://127.0.0.1:8001
 ```
 
-进入对应的文件夹用以下命令
+取消代理
 
-```sh
-find gitee -iname xxx
+```bash
+git config --global --unset http.proxy
+git config --global --unset https.proxy
 ```
 
-或者
+查看已有配置
 
-```sh
-find Specs -iname xxx
+```bash
+git config --global -l
 ```
 
-## 2.4 删除本地搜索库
+### 2 设置github代理
 
-```sh
-rm ~/Library/Caches/CocoaPods/search_index.json
+#### 1 ***http*** 、***https*** 方式
+
+```bash
+git config --global http.https://github.com.proxy http://127.0.0.1:8001
+git config --global https.https://github.com.proxy https://127.0.0.1:8001
 ```
 
-```sh
-sudo xattr -rd com.apple.quarantine /Applications/CleanMyMacX.app
+#### 2  SSH协议 sock5代理设置
+
+```bash
+git config --global http.https://github.com.proxy socks5://127.0.0.1:8001
+git config --global https.https://github.com.proxy socks5://127.0.0.1:8001
 ```
 
-****
+#### 3 取消代理
 
-分割线
-
-```markdown
-****
+```bash
+git config --global --unset http.https://github.com.proxy
+git config --global --unset https.https://github.com.proxy
 ```
 
-# 3. homebrew
+# 2. homebrew
 
 ```
 rvm是用来管理ruby的，ruby的其中一个“程序”叫rubygems，简称 gem，而用来管理项目 的gem的，叫bundle.完全是不同的东西，他们相同的只是都可以管理gem
@@ -170,7 +147,7 @@ Homebrew国内如何自动安装（国内地址）
 
 
 
-## 3.1 brew cask 拓展 安装mac app
+## 1 brew cask 拓展 安装mac app
 
 1. 搜索app,xx表示APP名称
 
@@ -185,7 +162,7 @@ brew install xx --cask 失效
 brew install --cask xxxx 
 ```
 
-## 3.2 命令
+## 2 命令
 
 ```
 brew search **  //查找某个软件包
@@ -221,7 +198,7 @@ sudo nginx -s reload
 sudo nginx -s quit
 ```
 
-## 3.3 RMV 离线安装
+## 3 RMV 离线安装
 
 ```
 上github下载rvm，https://github.com/rvm/rvm.git。
@@ -236,6 +213,160 @@ export PATH="/Users/ccy/.rvm/bin:$PATH"
 作者：molaoye
 链接：https://www.jianshu.com/p/4fb2e0f44a65
 来源：简书
+```
+
+
+
+# 3. cocopod使用
+
+## 1 新建
+
+```ruby
+init pod
+```
+
+## 2 打开编辑
+
+```ruby
+open -a xcode podfile
+```
+
+## 3 加载
+
+```ruby
+pod install --verbose --no-repo-update
+```
+
+执行pod install时，提示如下信息：
+
+The version of CocoaPods used to generate the lockfile (1.2.0.beta.1) is higher than the version of the current executable (1.1.1). Incompatibility issues may arise
+解决方法：
+
+执行：
+命令更新资源库即可。
+
+```ruby
+pod repo update
+```
+
+## 4 注册 不要bb 表示注册过,登录
+
+```ruby
+pod trunk register aa@qq.com bb
+```
+
+
+
+## 5.制作cocopod库
+
+### 1.制作
+
+#### 1. 注册(登录)
+
+```
+pod trunk register liu_weixing@qq.com 'axinger' --description='阿星iOS'
+```
+
+#### 2. 查看自己的库
+
+```
+pod trunk me
+```
+
+#### 3. 删除仓库的库
+
+```
+pod trunk remove-owner AXFoundation liu_weixing@qq.com
+```
+
+#### 4. 创建库
+
+```
+pod lib create AXiOSKit
+```
+
+```sh
+pod lib create xx --template-url=https://gitee.com/axinger/pod-template.git
+```
+
+#### 5.查看库信息
+
+```
+pod trunk info AXiOSKit
+```
+
+## 2 验证
+
+```
+说明：
+(1)--verbose:表示显示全部的日志信息，建议加上这个，方便判断错误信息。
+(2)--sources:如果我们在podspec里面依赖到一些私有的库之后，直接进行校验是会报错的提示找不到，这里加上我们的Spec仓库的地址告诉CocoaPods找不到的时候去哪里找。
+(3)--allow-warnings:表示允许警告.
+(4)--use-libraries:表示使用静态库或者是framework，这里主要是解决当我们依赖一些framework库后校验提示找不到库的时候用到。
+```
+
+### 1 本地验证,只从本地验证你的pod能否通过验证。
+
+```shell
+pod lib lint --verbose --use-libraries --allow-warnings --skip-import-validation
+--sources='https://gitee.com/axinger/AXCollectionObserve.git,https://gitee.com/mirrors/CocoaPods-Specs.git'
+```
+
+### 2 远程验证,是从本地和远程验证你的pod能否通过验证。
+
+```ruby
+pod spec lint --use-libraries --verbose --skip-import-validation --allow-warnings
+pod spec lint --use-libraries --allow-warnings --verbose --skip-import-validation
+
+pod spec lint --allow-warnings --verbose
+pod spec lint  --use-libraries --allow-warnings --verbose --skip-import-validation
+```
+
+## 3推送
+
+```ruby
+pod trunk push  --allow-warnings
+pod trunk push  --allow-warnings --verbose --use-libraries
+```
+
+```
+pod repo push 本地repo名 podspec名 --sources='私有仓库repo地址,https://github.com/CocoaPods/Specs'
+```
+
+cocopod 本地查找路径
+
+```sh
+find ~/.cocoapods/repos/master -iname xxx
+```
+
+进入对应的文件夹用以下命令
+
+```sh
+find gitee -iname xxx
+```
+
+或者
+
+```sh
+find Specs -iname xxx
+```
+
+## 4 删除本地搜索库
+
+```sh
+rm ~/Library/Caches/CocoaPods/search_index.json
+```
+
+```sh
+sudo xattr -rd com.apple.quarantine /Applications/CleanMyMacX.app
+```
+
+****
+
+分割线
+
+```markdown
+****
 ```
 
 # 4.Xcode
@@ -288,68 +419,6 @@ option command + ↔️ 最近位置
 查看所有方法 command + 7
 VS Code 快捷键
 格式化 shift +op+f 或者鼠标右键
-```
-
-# 6 Mac 操作
-
-## 6.1 mac 终端修改用户名
-
-```shell
-sudo scutil --set HostName xx
-```
-
-## 6.2 终端快捷键
-
-```
-清屏：command + k
-终止当前进程：control + z
-强制退出终端：command + q
-```
-
-## 6.3 设置git代理
-
-### 1.通用git
-
-设置代理
-
-```bash
-git config --global http.proxy http://127.0.0.1:8001
-```
-
-取消代理
-
-```bash
-git config --global --unset http.proxy
-git config --global --unset https.proxy
-```
-
-查看已有配置
-
-```bash
-git config --global -l
-```
-
-### 2 设置github代理
-
-#### 1 ***http*** 、***https*** 方式
-
-```bash
-git config --global http.https://github.com.proxy http://127.0.0.1:8001
-git config --global https.https://github.com.proxy https://127.0.0.1:8001
-```
-
-#### 2  SSH协议 sock5代理设置
-
-```bash
-git config --global http.https://github.com.proxy socks5://127.0.0.1:8001
-git config --global https.https://github.com.proxy socks5://127.0.0.1:8001
-```
-
-#### 3 取消代理
-
-```bash
-git config --global --unset http.https://github.com.proxy
-git config --global --unset https.https://github.com.proxy
 ```
 
 # 7 shell语法
@@ -560,50 +629,6 @@ select * from student where id = (select last_insert_id());
 
 ```
 replace INTO
-```
-
-# 12 Mac命令
-
-## 1.修改md5值
-
-```
-echo a >>
-```
-
-## 2.查看端口占用
-
-```
-lsof -i:8080
-```
-
-## 3.关闭端口
-
-```
-kill -9 PID 
-```
-
-# 13 本地path配置
-
-```text
-#JDK 
-#export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home
-export PATH=$PATH:$JAVA_HOME/bin
-# JDK END
-
-# go
-# go 创建项目保存路径
-export GOPATH=$HOME/Develop/go
-# go sdk的目录
-export GOROOT=/usr/local/go
-# go END
-
-#flutter 国内镜像
-export PUB_HOSTED_URL=https://pub.flutter-io.cn
-export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
-export FLUTTER_HOME=$HOME/Develop/SDK/flutter
-export PATH=$PATH:$FLUTTER_HOME/bin
-# flutter END
 ```
 
 # 14 vim 命令
