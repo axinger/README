@@ -1,4 +1,4 @@
-# 1. Mac命令
+# 一.Mac命令
 
 ## 1.本地path配置
 
@@ -59,14 +59,26 @@ find          实际搜寻硬盘查询文件名称
 sudo scutil --set HostName xx
 ```
 
-## 3. 快捷键
+### 6 修改侧边栏中文
+
+```
+1Desktop-桌面 touch ~/Desktop/.localized
+2Documents-文稿 touch ~/Documents/.localized
+3downloads-下载 touch ~/downloads/.localized
+4Pictures-图片 touch ~/Pictures/.localized
+5Music-音乐 touch ~/Music/.localized
+6Movies-影片 touch ~/Movies/.localized 
+```
+
+## 3. shell终端
 
 ### 1.终端快捷键
 
 ```
-清屏：command + k
+清屏：command + k, 或者 Ctrl+l
 终止当前进程：control + z
 强制退出终端：command + q
+清除正在输入的: Ctrl+u
 ```
 
 ## 4. 设置git代理
@@ -115,7 +127,7 @@ git config --global --unset http.https://github.com.proxy
 git config --global --unset https.https://github.com.proxy
 ```
 
-# 2. homebrew
+# 二. homebrew
 
 ```
 rvm是用来管理ruby的，ruby的其中一个“程序”叫rubygems，简称 gem，而用来管理项目 的gem的，叫bundle.完全是不同的东西，他们相同的只是都可以管理gem
@@ -137,17 +149,65 @@ Homebrew国内如何自动安装（国内地址）
 
 ## 1 brew cask 拓展 安装mac app
 
-1. 搜索app,xx表示APP名称
+### 1.搜索app,xx表示APP名称
 
 ```sh
-brew search xx --cask
+brew install --cask 软件名
 ```
 
-2. 安装app
+### 2.安装app
 
 ```sh
 brew install xx --cask 失效
-brew install --cask xxxx 
+brew install --cask 软件名
+```
+
+### 3. 源,替换为中科大源
+
+```
+https://www.cnblogs.com/heycomputer/articles/12823788.html
+```
+
+```bash
+# 替换各个源
+$ git -C "$(brew --repo)" remote set-url origin https://mirrors.ustc.edu.cn/brew.git
+$ git -C "$(brew --repo homebrew/core)" remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git
+$ git -C "$(brew --repo homebrew/cask)" remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git
+
+# zsh 替换 brew bintray 镜像
+$ echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles' >> ~/.zshrc
+$ source ~/.zshrc
+
+# bash 替换 brew bintray 镜像
+$ echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles' >> ~/.bash_profile
+$ source ~/.bash_profile
+
+# 刷新源
+$ brew update
+```
+
+### 4.重置为官方源
+
+```shell
+# 重置 brew.git 为官方源
+$ git -C "$(brew --repo)" remote set-url origin https://github.com/Homebrew/brew.git
+
+# 重置 homebrew-core.git 为官方源
+$ git -C "$(brew --repo homebrew/core)" remote set-url origin https://github.com/Homebrew/homebrew-core.git
+
+# 重置 homebrew-cask.git 为官方源
+$ git -C "$(brew --repo homebrew/cask)" remote set-url origin https://github.com/Homebrew/homebrew-cask
+
+# zsh 注释掉 HOMEBREW_BOTTLE_DOMAIN 配置
+$ vi ~/.zshrc
+# export HOMEBREW_BOTTLE_DOMAIN=xxxxxxxxx
+
+# bash 注释掉 HOMEBREW_BOTTLE_DOMAIN 配置
+$ vi ~/.bash_profile
+# export HOMEBREW_BOTTLE_DOMAIN=xxxxxxxxx
+
+# 刷新源
+$ brew update
 ```
 
 ## 2 命令
@@ -167,7 +227,7 @@ brew search redis
 brew list redis
 // 查看正在运行的服务
 brew services list    
-brew search redis
+brew search xx
 open /usr/local/bin/jmeter
 nacos 启动
 sh startup.sh -m standalone
@@ -203,7 +263,7 @@ export PATH="/Users/ccy/.rvm/bin:$PATH"
 来源：简书
 ```
 
-# 3. cocopod使用
+# 三. cocopod使用
 
 ## 1 新建
 
@@ -353,7 +413,7 @@ sudo xattr -rd com.apple.quarantine /Applications/CleanMyMacX.app
 ****
 ```
 
-# 4.Xcode
+# 四.Xcode
 
 ## 4.1快捷键
 
@@ -390,7 +450,7 @@ sudo xattr -rd com.apple.quarantine /Applications/CleanMyMacX.app
 
 ****
 
-# 5 idea 快捷键
+# 五.idea 快捷键
 
 ```
 ctrl + h 查看类或接口的继承关系：
@@ -627,3 +687,343 @@ replace INTO
 :q!          -不保存文件，强制退出 vim
 :e!          -放弃所有修改，从上次保存文件开始再编辑
 ```
+
+# 15 linux 命令
+
+```shell
+ps -ef | grep java  #查看java服务
+```
+
+```shell
+curl ip.sb # 只显示ipv4
+
+curl cip.cc #显示ipv4和地址信息
+```
+
+## jps命令
+
+```
+# jps(Java Virtual Machine Process Status Tool)
+#是java提供的一个显示当前所有java进程pid的命令，适合在linux/unix平台上简单察看当前java进程的一些简单情况。
+
+jps -l （显示java进程的Id和软件名称）
+
+jps -lmv（显示java进程的Id和软件名称；显示启动main输入参数；虚拟机参数）
+```
+
+```
+ps -ef | grep xx
+```
+
+## 文件权限
+
+```textile
+chmod 775 xx
+```
+
+```latex
+Linux文件访问权限分为可读，可写和可执行三种。
+rwxr-xr-x 1 root root 6444 09-22 15:33 shmwrite
+
+-rw-r--r-- 1 root root 1443 09-22 15:33 shmwrite.c
+
+drwxr-xr-x 2 root root 4096 09-22 17:19 test
+
+第一个字符代表文件类型。d代表目录,-代表非目录
+第一个字符代表文件类型。d代表目录,-代表非目录。
+
+接下来每三个字符为一组权限，分为三组，依次代表所有者权限，同组用户权限，其它用户权限
+
+每组权限的三个字符依次代表是否可读，是否可写，是否可执行
+
+r 表示拥有读的权限
+
+w 表示拥有写的权限
+
+x 表示拥有可执行的权限
+
+- 表示没有该权限
+
+修改权限
+
+可用chmod命令来修改文件权限。
+
+例如：
+
+chmod 754 test
+
+4代表读权限，2代表写权限，1代表执行权限
+
+7=4 + 2 + 1,表示拥有可读可写可执行权限
+
+5=4 + 1,表示拥有可读可执行权限，但是没有写权限
+
+0 代表没有任何权限
+
+以此类推
+
+思考下为什么是4，2，1分别代表读写执行权限,而不是其它数字？
+
+我们知道计算机最底层编码都是二进制，即0，1。要表示一个文件读写执行权限，底层只需一个字节，即8位即可。
+```
+
+```
+systemctl status xx
+```
+
+```
+netstat -aptn命令行，查看所有开启的端口号，
+```
+
+## netstat 命令
+
+```
+netstat -tunlp 用于显示 tcp，udp 的端口和进程等相关情况
+netstat 查看端口占用语法格式：
+netstat -tunlp | grep 端口号
+
+-t (tcp) 仅显示tcp相关选项
+-u (udp)仅显示udp相关选项
+-n 拒绝显示别名，能显示数字的全部转化为数字
+-l 仅列出在Listen(监听)的服务状态
+-p 显示建立相关链接的程序名
+```
+
+## **lsof 的命令**
+
+```
+losf能看到pid和用户，能够找到哪一个进程占用了这个端口grep
+lsof -i 所有端口
+lsof -i:8080：查看8080端口占用
+lsof abc.txt：显示开启文件abc.txt的进程
+lsof -c abc：显示abc进程现在打开的文件
+lsof -c -p 1234：列出进程号为1234的进程所打开的文件
+lsof -g gid：显示归属gid的进程情况
+lsof +d /usr/local/：显示目录下被进程开启的文件
+lsof +D /usr/local/：同上，但是会搜索目录下的目录，时间较长
+lsof -d 4：显示使用fd为4的进程
+lsof -i -U：显示所有打开的端口和UNIX domain文件
+```
+
+
+
+# 16 docker
+
+## 国内安装docker
+
+```
+curl -sSL https://get.daocloud.io/docker | sh
+```
+
+```
+--restart=always \ 自启动
+--privileged=true \ 容器内部拥有root权限
+```
+
+
+
+## mysql
+
+### 命令
+
+```
+docker run \
+--name mysql8 -d \
+-p 3308:3306 \
+--network demo-network \
+-e MYSQL_ROOT_PASSWORD=123456 \
+--restart=always \
+--privileged=true \
+-v ~/mydata/mysql8/data:/var/lib/mysql \
+-v ~/mydata/mysql8/logs:/var/log/mysql \
+-v ~/mydata/mysql8/conf/my.cnf:/etc/mysql/my.cnf \
+mysql:8.0.28
+```
+
+### 配置文件 my.cnf
+
+```
+[mysqld]
+pid-file        = /var/run/mysqld/mysqld.pid
+socket          = /var/run/mysqld/mysqld.sock
+datadir         = /var/lib/mysql
+secure-file-priv= NULL
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+
+# Custom config should go here
+!includedir /etc/mysql/conf.d/
+
+
+## 阿里云,下面不要使用
+# 默认使用“mysql_native_password”插件认证
+default_authentication_plugin= mysql_native_password
+#Accept connections from any IP address,客户端远程
+bind-address = 0.0.0.0
+
+# 设置mysql客户端默认字符集
+default-character-set=utf8
+[client]
+# 设置mysql客户端连接服务端时默认使用的端口
+port=3306
+default-character-set=utf8
+```
+
+## nacos
+
+### 低版本(1.4.x)
+
+```
+挂载的文是/home/nacos/init.d/custom.properties
+```
+
+```
+docker pull nacos/nacos-server:1.4.0
+
+mkdir -p ~/mydata/nacos1/{init.d,conf}
+
+docker run --name nacos -d \
+-e MODE=standalone \
+-p 8848:8848 \
+--restart=always \
+-v ~/mydata/nacos/logs:/home/nacos/logs \
+-v ~/mydata/nacos/init/custom.properties:/home/nacos/init.d/custom.properties \
+nacos/nacos-server:1.4.0
+```
+
+### 1.4.2 及 2.0.3版本
+
+```
+挂载的文件是/home/nacos/conf/application.properties
+```
+
+```
+mkdir -p ~/mydata/nacos1/{logs,conf}
+
+docker  run \
+--name nacos -d \
+-p 8848:8848 \
+--network demo-network \
+--privileged=true \
+--restart=always \
+-e MODE=standalone \
+-v ~/mydata/nacos/logs:/home/nacos/logs \
+-v ~/mydata/nacos/conf/application.properties:/home/nacos/conf/application.properties \
+nacos/nacos-server:1.4.2
+```
+
+###  持久化SQL
+
+```
+https://github.com/alibaba/nacos/blob/master/distribution/conf/nacos-mysql.sql
+```
+
+## seata
+
+### 命令
+
+```
+docker run --name demo-seata -d \
+-p 8091:8091 \
+--network demo-network \
+--privileged=true \
+--restart=always \
+-e SEATA_PORT=8091 \
+-v ~/mydata/seata/conf/registry.conf:/seata-server/resources/registry.conf \
+-v ~/mydata/seata/conf/file.conf:/seata-server/resources/file.conf \
+-v ~/mydata/seata/logs:/root/logs \
+seataio/seata-server:1.4.2
+```
+
+### 持久化SQL
+
+```
+新版本 seata+nacos 需要在nacos导入配置文件,官网执行sh脚本
+https://github.com/seata/seata/blob/develop/script/server/db/mysql.sql
+```
+
+
+
+## redis
+
+### 命令
+
+```
+docker run --name redis6 -d \
+-p 6379:6379 \
+--privileged=true \
+--restart=always \
+--network demo-network \
+-v ~/mydata/redis/conf:/etc/redis.conf \
+-v ~/mydata/redis/data:/data \
+redis:6.2.7-alpine3.15
+```
+
+## nginx
+
+### 建立挂载目录
+
+```
+mkdir -p ~/mydata/nginx/{conf,conf.d,html,log}
+docker run --name nginx-test -p 8080:80 -d nginx
+docker cp bfd33ad90560:/etc/nginx/nginx.conf ~/mydata/nginx/conf/nginx.conf
+docker cp bfd33ad90560:/etc/nginx/conf.d/default.conf ~/mydata/nginx/conf.d/default.conf
+```
+
+### 命令
+
+```
+docker run --name demo-nginx -d \
+-p 80:80 \
+-v ~/mydata/nginx/html:/usr/share/nginx/html \
+-v ~/mydata/nginx/conf/nginx.conf:/etc/nginx/nginx.conf \
+-v ~/mydata/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf \
+-v ~/mydata/nginx/log:/var/log/nginx \
+nginx
+```
+
+```
+docker run -i -t --network demo-network   -p 50070:50070 -p 9000:9000 -p 8088:8088 -p 8040:8040 -p 8042:8042  -p 49707:49707  -p 50010:50010  -p 50075:50075  -p 50090:50090 sequenceiq/hadoop-docker:2.6.0 /etc/bootstrap.sh -bash
+```
+
+
+
+# 17 flink
+
+```sql
+-- 源数据表
+CREATE TABLE source_person
+(
+    id STRING,
+    name STRING,
+    primary key (id) NOT ENFORCED
+)
+WITH (
+    'connector' = 'mysql-cdc',-- 监听binlog用mysql-cdc
+    'hostname' = 'localhost',
+    'port' = '3306',
+    'username' = 'root',
+    'password' = '12345678',
+    'database-name' = 'test_flink',
+    'table-name' = 'person',
+    'scan.startup.mode' = 'latest-offset' -- 每次偏移,默认全量
+)
+
+-- 目标数据表
+CREATE TABLE target_person (
+ id INT,
+ name STRING,
+ primary key (id) NOT ENFORCED
+) WITH (
+ 'connector' = 'jdbc',
+ 'driver' = 'com.mysql.cj.jdbc.Driver',
+ 'url' = 'jdbc:mysql://localhost:3306/test_flink_target?serverTimezone=UTC&useSSL=false',
+ 'username' = 'root',
+ 'password' = '12345678',
+ 'table-name' = 'person'
+)
+
+-- 监听输入
+insert into target_person select * from source_person
+```
+
