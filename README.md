@@ -694,6 +694,64 @@ replace INTO
 ps -ef | grep java  #查看java服务
 ```
 
+## 1. 查询 端口和进程号
+
+### (1)、根据端口找PID
+
+```
+netstat -anp | grep 8080
+```
+
+### (2)、根据应用名找PID
+
+```
+ps -ef | grep java
+```
+
+### (3)、PID列表
+
+````
+jps -l
+````
+
+### (4)、PID过滤
+
+````
+jps -l | grep 应用名
+````
+
+### (5)、通过PID查端口
+
+```
+netstat -nap | grep 进程号
+```
+
+```
+lsof -i | grep 进程号 # 不好用
+```
+
+### (6)、查询已开放的端口
+
+```
+netstat -lntu
+```
+
+```
+参数使用，
+    -l – 只显示监听接口
+    -n – 显示端口号
+    -t – 启用的 tcp 端口列表
+    -u – 启用的 udp 端口列表
+```
+
+### (7)、通过应用名称获得PID
+
+```
+`ps -ef | grep -n ${packageName} | grep -v grep | awk '{print $2}'`
+```
+
+
+
 ```shell
 curl ip.sb # 只显示ipv4
 
@@ -829,7 +887,7 @@ curl -sSL https://get.daocloud.io/docker | sh
 ```
 docker run \
 --name mysql8 -d \
--p 3308:3306 \
+-p 3306:3306 \
 --network demo-network \
 -e MYSQL_ROOT_PASSWORD=123456 \
 --restart=always \
@@ -898,7 +956,7 @@ nacos/nacos-server:1.4.0
 ```
 
 ```
-mkdir -p ~/mydata/nacos1/{logs,conf}
+mkdir -p ~/mydata/nacos/{logs,conf}
 
 docker  run \
 --name nacos -d \
@@ -965,8 +1023,10 @@ redis:6.2.7-alpine3.15
 
 ```
 mkdir -p ~/mydata/nginx/{conf,conf.d,html,log}
+
 docker run --name nginx-test -p 8080:80 -d nginx
 docker cp bfd33ad90560:/etc/nginx/nginx.conf ~/mydata/nginx/conf/nginx.conf
+
 docker cp bfd33ad90560:/etc/nginx/conf.d/default.conf ~/mydata/nginx/conf.d/default.conf
 ```
 
@@ -974,16 +1034,70 @@ docker cp bfd33ad90560:/etc/nginx/conf.d/default.conf ~/mydata/nginx/conf.d/defa
 
 ```
 docker run --name demo-nginx -d \
--p 80:80 \
+-p 3500:80 \
+--network demo-network \
 -v ~/mydata/nginx/html:/usr/share/nginx/html \
 -v ~/mydata/nginx/conf/nginx.conf:/etc/nginx/nginx.conf \
 -v ~/mydata/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf \
 -v ~/mydata/nginx/log:/var/log/nginx \
-nginx
+nginx:1.21.6-alpine
 ```
 
 ```
 docker run -i -t --network demo-network   -p 50070:50070 -p 9000:9000 -p 8088:8088 -p 8040:8040 -p 8042:8042  -p 49707:49707  -p 50010:50010  -p 50075:50075  -p 50090:50090 sequenceiq/hadoop-docker:2.6.0 /etc/bootstrap.sh -bash
+```
+
+
+
+## mongodb
+
+### 文件夹
+
+```
+mkdir -p ~/mydata/mongodb/{data,conf,backup}
+```
+
+### mongodb.conf
+
+```
+# mongodb.conf
+logappend=true
+# bind_ip=127.0.0.1
+port=27017 
+fork=true
+noprealloc=true
+auth=true
+```
+
+
+
+### 命令
+
+```
+
+docker run --name mongodb -d \
+-p 27017:27017 \
+--network demo-network \
+-e MONGO_INITDB_ROOT_USERNAME=root \
+-e MONGO_INITDB_ROOT_PASSWORD=123456 \
+-v ~/mydata/mongodb/data:/data/db \
+-v ~/mydata/mongodb/backup:/data/backup \
+-v ~/mydata/mongodb/conf:/data/configdb \
+mongo:4.4.13-focal
+```
+
+## minio
+
+### 命令
+
+```
+docker run -d -p 9000:9000 -p 9001:9001 --name=minio \
+--restart=always \
+-e "MINIO_ROOT_USER=admin" \
+-e "MINIO_ROOT_PASSWORD=12345678" \
+-v ~/mydata/minio/data:/data \
+-v ~/mydata/minio/config:/root/.minio \
+minio/minio server /data --console-address ":9001" --address ":9000"
 ```
 
 
