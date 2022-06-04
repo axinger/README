@@ -889,6 +889,7 @@ docker run \
 --name mysql8 -d \
 -p 3306:3306 \
 --network demo-network \
+--network-alias mysql8 \
 -e MYSQL_ROOT_PASSWORD=123456 \
 --restart=always \
 --privileged=true \
@@ -927,6 +928,20 @@ port=3306
 default-character-set=utf8
 ```
 
+## Navicat链接问题
+
+```
+docker exec -it mysql8 /bin/bash
+mysql -u root -p
+use mysql;
+update user set host = '%' where user ='root';
+flush privileges;
+```
+
+
+
+
+
 ## nacos
 
 ### 低版本(1.4.x)
@@ -952,16 +967,21 @@ nacos/nacos-server:1.4.0
 ### 1.4.2 及 2.0.3版本
 
 ```
+mkdir -p ~/mydata/nacos/{logs,conf}
+```
+
+
+
+```
 挂载的文件是/home/nacos/conf/application.properties
 ```
 
 ```
-mkdir -p ~/mydata/nacos/{logs,conf}
-
 docker  run \
 --name nacos -d \
 -p 8848:8848 \
 --network demo-network \
+--network-alias nacos \
 --privileged=true \
 --restart=always \
 -e MODE=standalone \
