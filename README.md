@@ -970,7 +970,12 @@ nacos/nacos-server:1.4.0
 mkdir -p ~/mydata/nacos/{logs,conf}
 ```
 
-
+````
+修改内存大小
+-e JVM_XMS=128m \
+-e JVM_XMX=128m \
+-e JVM_XMN=64m \
+````
 
 ```
 挂载的文件是/home/nacos/conf/application.properties
@@ -985,9 +990,12 @@ docker  run \
 --privileged=true \
 --restart=always \
 -e MODE=standalone \
+-e JVM_XMS=128m \
+-e JVM_XMX=128m \
+-e JVM_XMN=64m \
 -v ~/mydata/nacos/logs:/home/nacos/logs \
 -v ~/mydata/nacos/conf/application.properties:/home/nacos/conf/application.properties \
-nacos/nacos-server:1.4.2
+nacos/nacos-server:v2.0.4
 ```
 
 ###  持久化SQL
@@ -1118,6 +1126,28 @@ docker run -d -p 9000:9000 -p 9001:9001 --name=minio \
 -v ~/mydata/minio/data:/data \
 -v ~/mydata/minio/config:/root/.minio \
 minio/minio server /data --console-address ":9001" --address ":9000"
+```
+
+## keycloak
+
+```
+docker run --name keycloak -d -p 7010:8080 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin jboss/keycloak:16.0.0
+```
+
+```
+docker exec -it keycloak bash
+```
+
+```
+cd /opt/jboss/keycloak/bin  # 在opt里面,每个版本不一样,
+```
+
+```
+./kcadm.sh config credentials --server http://localhost:8080/auth --realm master --user admin 
+```
+
+```
+./kcadm.sh update realms/master -s sslRequired=NONE
 ```
 
 
