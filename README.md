@@ -809,6 +809,7 @@ x 表示拥有可执行的权限
 例如：
 
 chmod 754 test
+chmod -R 754 test # -R表示修改本文件夹及子文件夹权限
 
 4代表读权限，2代表写权限，1代表执行权限
 
@@ -1149,6 +1150,26 @@ cd /opt/jboss/keycloak/bin  # 在opt里面,每个版本不一样,
 ```
 ./kcadm.sh update realms/master -s sslRequired=NONE
 ```
+
+## rabbitmq
+
+### 命令
+
+```
+docker run --name rabbitmq -d \
+--privileged=true \
+--restart=always \
+-d -p 5672:5672 -p 15672:15672 \
+-v ~/mydata/rabbitmq/data:/var/lib/rabbitmq \
+-v ~/mydata/rabbitmq/conf:/etc/rabbitmq \
+-v ~/mydata/rabbitmq/log:/var/log/rabbitmq \
+--hostname=rabbitmqhost -e RABBITMQ_DEFAULT_VHOST=my_vhost \
+-e RABBITMQ_DEFAULT_USER=admin \
+-e RABBITMQ_DEFAULT_PASS=admin \
+rabbitmq:3.9.20-management-alpine
+```
+
+
 
 
 
