@@ -1091,6 +1091,7 @@ mkdir -p ~/mydata/mongodb/{data,conf,backup}
 ```
 # mongodb.conf
 logappend=true
+# 被远程
 # bind_ip=127.0.0.1
 port=27017 
 fork=true
@@ -1107,6 +1108,7 @@ auth=true
 docker run --name mongodb -d \
 -p 27017:27017 \
 --network demo-network \
+--privileged=true \
 -e MONGO_INITDB_ROOT_USERNAME=root \
 -e MONGO_INITDB_ROOT_PASSWORD=123456 \
 -v ~/mydata/mongodb/data:/data/db \
