@@ -868,7 +868,9 @@ lsof -i -U：显示所有打开的端口和UNIX domain文件
 
 # 16 docker
 
-## 国内安装docker
+## 安装
+
+### 国内安装docker
 
 ```
 curl -sSL https://get.daocloud.io/docker | sh
@@ -877,6 +879,18 @@ curl -sSL https://get.daocloud.io/docker | sh
 ```
 --restart=always \ 自启动
 --privileged=true \ 容器内部拥有root权限
+```
+
+### 创建完成的容器修改启动参数
+
+```
+docker container update restart=always 容器名或id
+```
+
+### 查看气启动参数
+
+```
+runlike 容器
 ```
 
 
@@ -929,7 +943,7 @@ port=3306
 default-character-set=utf8
 ```
 
-## Navicat链接问题
+### Navicat链接问题
 
 ```
 docker exec -it mysql8 /bin/bash
@@ -939,7 +953,16 @@ update user set host = '%' where user ='root';
 flush privileges;
 ```
 
+##  postgres
 
+```
+docker run --name demo-pgsql  -d \
+--network demo-network \
+-e POSTGRES_PASSWORD=postgres \
+-p 5432:5432 \
+-v ~/mydata/pgsql/data:/var/lib/postgresql/data \
+postgres
+```
 
 
 
@@ -1104,13 +1127,12 @@ auth=true
 ### 命令
 
 ```
-
 docker run --name mongodb -d \
 -p 27017:27017 \
---network demo-network \
+--network=demo-network \
 --privileged=true \
--e MONGO_INITDB_ROOT_USERNAME=root \
--e MONGO_INITDB_ROOT_PASSWORD=123456 \
+-e MONGO_INITDB_ROOT_USERNAME=admin \
+-e MONGO_INITDB_ROOT_PASSWORD=admin123 \
 -v ~/mydata/mongodb/data:/data/db \
 -v ~/mydata/mongodb/backup:/data/backup \
 -v ~/mydata/mongodb/conf:/data/configdb \
@@ -1122,13 +1144,15 @@ mongo:4.4.13-focal
 ### 命令
 
 ```
-docker run -d -p 9000:9000 -p 9001:9001 --name=minio \
---restart=always \
--e "MINIO_ROOT_USER=admin" \
--e "MINIO_ROOT_PASSWORD=12345678" \
+docker run -p 9030:9000 -p 9031:9001 --name minio \
+-d --restart=always \
+--privileged=true \
+-e TZ="Asia/Shanghai" \
+-e MINIO_ROOT_USER=admin \
+-e MINIO_ROOT_PASSWORD=admin123 \
 -v ~/mydata/minio/data:/data \
 -v ~/mydata/minio/config:/root/.minio \
-minio/minio server /data --console-address ":9001" --address ":9000"
+minio/minio:latest server /data --console-address ":9001"
 ```
 
 ## keycloak
