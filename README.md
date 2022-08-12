@@ -895,6 +895,66 @@ runlike 容器
 
 
 
+## docker服务命令
+
+```
+启动: systemctl start docker
+停止: systemctl stop docker
+重启: systemctl restart docker
+查看状态: systemctl status docker
+开机启动: systemctl enable docker
+```
+
+## 镜像命令
+
+```
+查看概要: docker info
+查看本地镜像: docker images
+拉取镜像: docker pull
+查看存储: docker system df
+强制删除镜像: docker rmi -f
+查看已下载的Docker镜像latest具体版本
+docker image inspect (docker image名称):latest|grep -i version
+```
+
+## 容器命令
+
+```
+启动交互式容器(前台命令行)
+
+查看运行的容器: docker ps 
+显示所有的容器，包括未运行的: docker ps -a
+    停止后无法查看,要查看需要运行的,可以用 docker images 查找容器id 也可以用 docker ps -n 2 最近使用的
+查看已经停止的: docker ps -n 2
+进入容器: docker exec -it 容器id /bin/bash
+
+退出
+容器关闭:   exit 
+容器不停止:  ctrl+p+q 
+
+启动已经停止的容器id: docker start 容器id
+重启容器: docker restart 容器id
+停止容器: docker stop 容器id
+强制停止容器: docker kill 容器id
+删除已停止容器: docker rm
+
+开机启动 docker update --restart=always  xx
+```
+
+## 查看容器运行状态
+
+```
+docker stats 
+```
+
+## 复制文件到容器
+
+```
+docker cp 容器di:容器内路径 目的主机路径
+```
+
+
+
 ## mysql
 
 ### 命令
