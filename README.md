@@ -1249,10 +1249,21 @@ docker run --name rabbitmq -d \
 -v ~/mydata/rabbitmq/data:/var/lib/rabbitmq \
 -v ~/mydata/rabbitmq/conf:/etc/rabbitmq \
 -v ~/mydata/rabbitmq/log:/var/log/rabbitmq \
---hostname=rabbitmqhost -e RABBITMQ_DEFAULT_VHOST=my_vhost \
+--hostname=rabbitmqhost \
+-e RABBITMQ_DEFAULT_VHOST=my_vhost \
 -e RABBITMQ_DEFAULT_USER=admin \
--e RABBITMQ_DEFAULT_PASS=admin \
+-e RABBITMQ_DEFAULT_PASS=123456 \
 rabbitmq:3.9.20-management-alpine
+```
+
+### 进入bin开启管理页面
+
+```
+docker exec -it rabbitmq /bin/bash
+```
+
+```
+rabbitmq-plugins enable rabbitmq_management
 ```
 
 
