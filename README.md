@@ -868,7 +868,7 @@ lsof -i -U：显示所有打开的端口和UNIX domain文件
 
 # 16 docker
 
-## 安装
+## 安装和命令
 
 ### 国内安装docker
 
@@ -895,7 +895,7 @@ runlike 容器
 
 
 
-## docker服务命令
+### 系统开关机命令
 
 ```
 启动: systemctl start docker
@@ -905,7 +905,7 @@ runlike 容器
 开机启动: systemctl enable docker
 ```
 
-## 镜像命令
+### 镜像命令
 
 ```
 查看概要: docker info
@@ -917,7 +917,7 @@ runlike 容器
 docker image inspect (docker image名称):latest|grep -i version
 ```
 
-## 容器命令
+### 容器命令
 
 ```
 启动交互式容器(前台命令行)
@@ -941,16 +941,24 @@ docker image inspect (docker image名称):latest|grep -i version
 开机启动 docker update --restart=always  xx
 ```
 
-## 查看容器运行状态
+### 查看容器运行状态
 
 ```
 docker stats 
 ```
 
-## 复制文件到容器
+### 复制文件到容器
 
 ```
 docker cp 容器di:容器内路径 目的主机路径
+```
+
+## portainer-ce 图形界面
+
+### 命令
+
+```
+docker run -d  --name portainer -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v /app/portainer_data:/data --restart always --privileged=true portainer/portainer-ce:latest
 ```
 
 
