@@ -1,4 +1,4 @@
-# 一.Mac命令
+# 1.Mac命令
 
 ## 1.本地path配置
 
@@ -127,7 +127,7 @@ git config --global --unset http.https://github.com.proxy
 git config --global --unset https.https://github.com.proxy
 ```
 
-# 二. homebrew
+# 2. homebrew
 
 ```
 rvm是用来管理ruby的，ruby的其中一个“程序”叫rubygems，简称 gem，而用来管理项目 的gem的，叫bundle.完全是不同的东西，他们相同的只是都可以管理gem
@@ -263,7 +263,7 @@ export PATH="/Users/ccy/.rvm/bin:$PATH"
 来源：简书
 ```
 
-# 三. cocopod使用
+# 3. cocopod使用
 
 ## 1 新建
 
@@ -413,7 +413,7 @@ sudo xattr -rd com.apple.quarantine /Applications/CleanMyMacX.app
 ****
 ```
 
-# 四.Xcode
+# 4.Xcode
 
 ## 4.1快捷键
 
@@ -450,7 +450,7 @@ sudo xattr -rd com.apple.quarantine /Applications/CleanMyMacX.app
 
 ****
 
-# 五.idea 快捷键
+# 5.idea 快捷键
 
 ```
 ctrl + h 查看类或接口的继承关系：
