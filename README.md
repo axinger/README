@@ -1073,27 +1073,43 @@ mkdir -p ~/mydata/nacos/{logs,conf}
 挂载的文件是/home/nacos/conf/application.properties
 ```
 
+##### 复制配置文件
+
+```
+docker  run \
+--name nacos -d \
+-p 8848:8848 \
+nacos/nacos-server:v2.0.4
+```
+
+```
+docker cp nacos:/home/nacos/conf/application.properties ~/mydata/nacos/conf/application.properties
+```
+
+```
+docker stop nacos 
+docker rm nacos
+```
+
+
+
 ```
 docker  run \
 --name nacos -d \
 -p 8848:8848 \
 --network demo-network \
---network-alias nacos \
 --privileged=true \
 --restart=always \
 -e MODE=standalone \
--e JVM_XMS=128m \
--e JVM_XMX=128m \
--e JVM_XMN=64m \
 -v ~/mydata/nacos/logs:/home/nacos/logs \
 -v ~/mydata/nacos/conf/application.properties:/home/nacos/conf/application.properties \
 nacos/nacos-server:v2.0.4
 ```
 
-###  持久化SQL
+##### 持久化SQL,注意版本
 
 ```
-https://github.com/alibaba/nacos/blob/master/distribution/conf/nacos-mysql.sql
+https://github.com/alibaba/nacos/blob/2.0.4/distribution/conf/nacos-mysql.sql
 ```
 
 ## seata
@@ -1144,10 +1160,10 @@ redis:6.2.7-alpine3.15
 ```
 mkdir -p ~/mydata/nginx/{conf,conf.d,html,log}
 
-docker run --name nginx-test -p 8080:80 -d nginx
-docker cp bfd33ad90560:/etc/nginx/nginx.conf ~/mydata/nginx/conf/nginx.conf
+docker run --name demo-nginx -p 8080:80 -d nginx
+docker cp demo-nginx:/etc/nginx/nginx.conf ~/mydata/nginx/conf/nginx.conf
 
-docker cp bfd33ad90560:/etc/nginx/conf.d/default.conf ~/mydata/nginx/conf.d/default.conf
+docker cp demo-nginx:/etc/nginx/conf.d/default.conf ~/mydata/nginx/conf.d/default.conf
 ```
 
 ### 命令
