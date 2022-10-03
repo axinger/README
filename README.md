@@ -982,6 +982,12 @@ docker run \
 mysql:8.0.28
 ```
 
+```
+docker cp mysql8:/etc/mysql/my.cnf ~/mydata/mysql8/conf/my.cnf
+```
+
+
+
 ### 配置文件 my.cnf
 
 ```
